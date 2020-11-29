@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="bt/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bt/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="bt/js/jquery.js"></script>
+    <script type="text/javascript" src="bt/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputUserName1">UserName</label>
+            <input type="text" class="form-control" id="exampleInputUserName1" placeholder="UserName">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">重复密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+        </div>
+        <input id="sub" class="btn-success form-control" type="button" value="注册"/>
+    </form>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $("#sub").click(function(){
+        const username = $("#exampleInputUserName1").val();
+        const passWord = $("#exampleInputPassword1").val();
+        const repassWord = $("#exampleInputPassword2").val();
+        if (username.length === 0){
+            alert("用户名不能为空");
+            return;
+        }
+        if (passWord.length === 0){
+            alert("密码不能为空");
+            return;
+        }
+        if(passWord !== repassWord){
+            alert("两次密码输入不一致");
+            return;
+        }
+        const user = {
+            "username":username,
+            "password":passWord
+        }
+        const userJson = JSON.stringify(user)
+        $.post({
+           url: 'user/save',
+           data: userJson,
+           contentType: 'application/json',
+           success:function(){
+               alert(data)
+           }
+        });
+    });
+</script>
